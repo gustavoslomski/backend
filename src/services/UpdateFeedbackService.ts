@@ -1,7 +1,7 @@
 import prismaClient from "../prisma"
 
 class UpdateFeedbackService {
-  async execute(id: string, improvement: string, maintain: string, suggestion: string, message: string) {
+  async execute(id: string, improvement: string, maintain: string, suggestion: string, message: string, date: string) {
     const feedback = await prismaClient.feedback.update({
       where: {
         id: id
@@ -10,7 +10,8 @@ class UpdateFeedbackService {
         improvement: improvement,
         maintain: maintain,
         suggestion: suggestion,
-        message: message
+        message: message,
+        date: date
       }
     })
 

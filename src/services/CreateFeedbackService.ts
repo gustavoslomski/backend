@@ -1,7 +1,7 @@
 import prismaClient from "../prisma"
 
 class CreateFeedbackService {
-  async execute(creator_id: string, author: string, target: string, improvement: string, maintain: string, suggestion: string, message: string) {
+  async execute(creator_id: string, author: string, target: string, improvement: string, maintain: string, suggestion: string, message: string, date: string) {
     const persisted_author = await prismaClient.user.findFirst({
       where: {
         github_id: Number(author),
@@ -22,7 +22,8 @@ class CreateFeedbackService {
         improvement: improvement,
         maintain: maintain,
         suggestion: suggestion,
-        message: message
+        message: message,
+        date: date
       }
     })
 

@@ -5,11 +5,11 @@ class CreateFeedbackController {
   async handle(request: Request, response: Response) {
 
     const { user_id } = request;
-    const { author, target, improvement, maintain, suggestion, message } = request.body;
+    const { author, target, improvement, maintain, suggestion, message, date } = request.body;
 
     const service = new CreateFeedbackService();
 
-    const result = await service.execute(user_id, author, target, improvement, suggestion, maintain, message)
+    const result = await service.execute(user_id, author, target, improvement, suggestion, maintain, message, date)
 
     return response.json(result);
   }

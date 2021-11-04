@@ -22,7 +22,7 @@ model User {
 
 model Feedback {
   id          String   @id @default(uuid())
-  date        DateTime @default(now())
+  date        String
   improvement String
   maintain    String
   suggestion  String
