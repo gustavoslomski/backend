@@ -1,0 +1,43 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id         String @id @default(uuid())
+  name       String
+  github_id  Int
+  avatar_url String
+  login      String
+
+  Targets  Feedback[] @relation("target")
+  Authors  Feedback[] @relation("author")
+  Creators Feedback[] @relation("creator")
+  @@map("users")
+}
+
+model Feedback {
+  id          String   @id @default(uuid())
+  date        DateTime @default(now())
+  improvement String
+  maintain    String
+  suggestion  String
+  message     String
+  created_at  DateTime @default(now())
+
+
+  target User @relation(name: "target", fields: [target_id], references: [id])
+
+  target_id String
+
+  author_id String
+  author    User   @relation(name: "author", fields: [author_id], references: [id])
+
+  creator_id String
+  creator    User   @relation(name: "creator", fields: [creator_id], references: [id])
+  @@map("feedbacks")
+}
